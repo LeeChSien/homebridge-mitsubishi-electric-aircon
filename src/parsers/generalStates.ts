@@ -100,11 +100,11 @@ export const parseGeneralStates = (payload: string): GeneralStates => {
     windSpeed,
     verticalWindDirection: {
       right: rightVerticalWindDirection,
-      left: leftVerticaWindDirection
+      left: leftVerticaWindDirection,
     },
     horizontalWindDirection,
     dehumSetting,
     isPowerSaving,
-    windAndWindBreakDirect
+    windAndWindBreakDirect,
   }
 }

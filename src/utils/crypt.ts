@@ -20,7 +20,7 @@ export const encrypt = (payload: string) => {
     mode: CryptoJS.mode.CBC,
     iv: randomWord,
     padding: CryptoJS.pad.ZeroPadding,
-    keySize: KEY_SIZE
+    keySize: KEY_SIZE,
   }).toString()
   encrypted = Hex.stringify(randomWord) + Hex.stringify(Base64.parse(encrypted));
   return Base64.stringify(Hex.parse(encrypted))
@@ -34,7 +34,7 @@ export const decrypt = (payload: string) => {
     mode: CryptoJS.mode.CBC,
     iv,
     padding: CryptoJS.pad.ZeroPadding,
-    keySize: KEY_SIZE
+    keySize: KEY_SIZE,
   }).toString(Hex)
   decrypted = decrypted.slice(2 * KEY_SIZE, decrypted.length)
   return Buffer.from(decrypted, 'hex').toString('utf8')

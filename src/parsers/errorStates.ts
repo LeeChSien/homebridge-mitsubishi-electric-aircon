@@ -11,6 +11,6 @@ export const parseErrorStates = (payload: string): ErrorStates => {
 
   return {
     isAbnormalState,
-    errorCode
+    errorCode,
   }
 }

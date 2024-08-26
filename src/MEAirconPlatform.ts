@@ -1,12 +1,12 @@
-import type { API, Characteristic, DynamicPlatformPlugin, Logging, PlatformAccessory, PlatformConfig, Service } from 'homebridge';
+import type { API, Characteristic, DynamicPlatformPlugin, Logging, PlatformAccessory, PlatformConfig, Service } from 'homebridge'
 
-import { MEAirconPlatformAccessory } from './MEAirconPlatformAccessory.js';
+import { MEAirconPlatformAccessory } from './MEAirconPlatformAccessory.js'
 
 export class MEAirconPlatform implements DynamicPlatformPlugin {
   public readonly Service: typeof Service;
   public readonly Characteristic: typeof Characteristic;
 
-  public readonly accessories: PlatformAccessory[] = [];
+  public readonly accessories: PlatformAccessory[] = []
 
   constructor(
     public readonly log: Logging,
@@ -16,7 +16,7 @@ export class MEAirconPlatform implements DynamicPlatformPlugin {
     this.Service = api.hap.Service;
     this.Characteristic = api.hap.Characteristic;
 
-    this.log.debug('Finished initializing platform:', this.config.name);
+    this.log.debug('Finished initializing platform:', this.config.name)
 
     this.api.on('didFinishLaunching', () => {
       log.debug('Executed didFinishLaunching callback')
@@ -36,7 +36,7 @@ export class MEAirconPlatform implements DynamicPlatformPlugin {
       try {
         await airconAccessory.init()
       } catch (e) {
-        this.log.error('Cannot init aircon:', aircon.name);
+        this.log.error('Cannot init aircon:', aircon.name)
       }
     }
   }

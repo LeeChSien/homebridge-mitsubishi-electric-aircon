@@ -16,6 +16,6 @@ export const parseSensorStates = (payload: string): SensorStates => {
     outsideTemperature,
     roomTemperature,
     thermalSensor,
-    windSpeedPr557
+    windSpeedPr557,
   }
 }

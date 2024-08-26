@@ -1,12 +1,12 @@
-import { Curl } from 'node-libcurl';
+import { Curl } from 'node-libcurl'
 import xml2js from 'xml2js'
 import { DRIVE_MODE, MEAirconStates, POWER_ON_OFF } from './types.js'
 import { encrypt, decrypt } from './utils/crypt.js'
 import { isGeneralStatesPayload, parseGeneralStates } from './parsers/generalStates.js'
 import { isSensorStatesPayload, parseSensorStates } from './parsers/sensorStates.js'
 import { isErrorStatesPayload, parseErrorStates } from './parsers/errorStates.js'
-import { extend08Command } from './commands/extend08.js';
-import { generalCommand } from './commands/general.js';
+import { extend08Command } from './commands/extend08.js'
+import { generalCommand } from './commands/general.js'
 
 interface MEAirconIdentify {
   mac: string
@@ -16,7 +16,7 @@ interface MEAirconIdentify {
 }
 
 const REQUEST_TEMPLATE = {
-  CONNECT: 'ON'
+  CONNECT: 'ON',
 }
 
 const parseIdentity = async (response: string): Promise<MEAirconIdentify> => {
@@ -28,7 +28,7 @@ const parseIdentity = async (response: string): Promise<MEAirconIdentify> => {
     mac: MAC[0],
     serial: SERIAL[0],
     rssi: RSSI[0],
-    appVersion: APP_VER[0]
+    appVersion: APP_VER[0],
   } as MEAirconIdentify
 }
 
@@ -42,21 +42,21 @@ const parseStates = async (response: string): Promise<MEAirconStates> => {
     if (isGeneralStatesPayload(payload)) {
       newStates = {
         ...newStates,
-        ...parseGeneralStates(payload)
+        ...parseGeneralStates(payload),
       }
     }
 
     if (isSensorStatesPayload(payload)) {
       newStates = {
         ...newStates,
-        ...parseSensorStates(payload)
+        ...parseSensorStates(payload),
       }
     }
 
     if (isErrorStatesPayload(payload)) {
       newStates = {
         ...newStates,
-        ...parseErrorStates(payload)
+        ...parseErrorStates(payload),
       }
     }
   })
@@ -100,7 +100,7 @@ export default class MEAircon {
           'Proxy-Connection: keep-alive',
           'Accept: */*',
           'User-Agent: KirigamineRemote/5.1.0 (jp.co.MitsubishiElectric.KirigamineRemote; build:3; iOS 17.5.1) Alamofire/5.9.1',
-          'Accept-Language: zh-Hant-JP;q=1.0, ja-JP;q=0.9'
+          'Accept-Language: zh-Hant-JP;q=1.0, ja-JP;q=0.9',
         ])
         curl.on('end', (_statusCode: string, data: string) => {
           resolve(data)
@@ -115,14 +115,15 @@ export default class MEAircon {
     const response = await this.postRequest(REQUEST_TEMPLATE)
     this.states = {
       ...this.states,
-      ...await parseStates(response)
+      ...await parseStates(response),
     }
     this.identity = {
       ...this.identity,
-      ...await parseIdentity(response)
+      ...await parseIdentity(response),
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getAttribute(attrName: keyof MEAirconStates): any {
     switch (attrName) {
       case 'powerOnOff':
@@ -147,48 +148,48 @@ export default class MEAircon {
   async setPowerOnOff(power: boolean) {
     this.states = {
       ...this.states,
-      powerOnOff: power ? POWER_ON_OFF.ON : POWER_ON_OFF.OFF
+      powerOnOff: power ? POWER_ON_OFF.ON : POWER_ON_OFF.OFF,
     }
     await this.postRequest({
       ...REQUEST_TEMPLATE,
       CODE: {
         VALUE: [
           getBuzzPayload(this.states),
-          generalCommand(this.states, { powerOnOff: true })
-        ]
-      }
+          generalCommand(this.states, { powerOnOff: true }),
+        ],
+      },
     })
   }
 
   async setDriveMode(driveMode: DRIVE_MODE) {
     this.states = {
       ...this.states,
-      driveMode
+      driveMode,
     }
     await this.postRequest({
       ...REQUEST_TEMPLATE,
       CODE: {
         VALUE: [
           getBuzzPayload(this.states),
-          generalCommand(this.states, { driveMode: true })
-        ]
-      }
+          generalCommand(this.states, { driveMode: true }),
+        ],
+      },
     })
   }
 
   async setTemerature(temperature: number) {
     this.states = {
       ...this.states,
-      temperature: temperature * 10
+      temperature: temperature * 10,
     }
     await this.postRequest({
       ...REQUEST_TEMPLATE,
       CODE: {
         VALUE: [
           getBuzzPayload(this.states),
-          generalCommand(this.states, { temperature: true })
-        ]
-      }
+          generalCommand(this.states, { temperature: true }),
+        ],
+      },
     })
   }
 }

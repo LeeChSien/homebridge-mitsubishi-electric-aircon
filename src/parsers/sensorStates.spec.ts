@@ -12,7 +12,7 @@ describe('parsers > sensorStates', () => {
       outsideTemperature: 330,
       roomTemperature: 245,
       thermalSensor: false,
-      windSpeedPr557: 0
+      windSpeedPr557: 0,
     })
   })
 })

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { GeneralStates, GeneralControls } from '../types.js'
 import { calcFCC } from '../utils/calcFCC.js'
 
@@ -35,7 +36,7 @@ export const generalCommand = (states: Omit<GeneralStates, 'dehumSetting' | 'isP
     segment7: '00',
     segment13: '00',
     segment14: '00',
-    segment15: '00'
+    segment15: '00',
   }
 
   let segment1Value = 0

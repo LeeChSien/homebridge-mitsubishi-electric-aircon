@@ -10,7 +10,7 @@ describe('parsers > errorStates', () => {
   it('parseErrorStates', () => {
     expect(parseErrorStates(EXAMPLE_PAYLOAD)).toStrictEqual({
       isAbnormalState: false,
-      errorCode: '8000'
+      errorCode: '8000',
     })
   })
 })

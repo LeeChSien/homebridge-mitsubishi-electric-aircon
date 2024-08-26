@@ -8,12 +8,12 @@ const EXAMPLE_STATES = {
   windSpeed: WIND_SPEED.AUTO,
   verticalWindDirection: {
     right: VERTICAL_WIND_DIRECTION.AUTO,
-    left: VERTICAL_WIND_DIRECTION.AUTO
+    left: VERTICAL_WIND_DIRECTION.AUTO,
   },
   horizontalWindDirection: HORIZONTAL_WIND_DIRECTION.AUTO,
   dehumSetting: 60,
   isPowerSaving: false,
-  windAndWindBreakDirect: 2
+  windAndWindBreakDirect: 2,
 } 
 
 describe('commands > general', () => {
