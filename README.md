@@ -4,6 +4,9 @@ Homebridge plugin for Mitsubishi Electric air conditioners.
 
 Control the air conditioner in local area network.
 
+<img src="https://github.com/user-attachments/assets/efa7548c-0be3-4006-964e-521fb9d50989" width="300" />
+
+<img src="https://github.com/user-attachments/assets/5c194a0f-d56f-41f5-ade1-52cce0f3f47c" width="300" />
 
 ## Usage
 
