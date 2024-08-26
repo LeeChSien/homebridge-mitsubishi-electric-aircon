@@ -1,16 +1,17 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import eslintConfigPrettier from "eslint-config-prettier";
 
-export default tseslint.config(
+export default [tseslint.config(
   {
     ignores: ['dist/**'],
   },
   {
     rules: {
-      'quotes': ['error', 'single'],
-      'indent': ['error', 2, { 'SwitchCase': 0 }],
+      // 'quotes': ['error', 'single'],
+      // 'indent': ['error', 2, { 'SwitchCase': 0 }],
       'linebreak-style': ['error', 'unix'],
-      'semi': ['error', 'always'],
+      // 'semi': ['error', 'always'],
       'comma-dangle': ['error', 'always-multiline'],
       'dot-notation': 'error',
       'eqeqeq': ['error', 'smart'],
@@ -32,4 +33,6 @@ export default tseslint.config(
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
-);
+),
+  eslintConfigPrettier
+]
