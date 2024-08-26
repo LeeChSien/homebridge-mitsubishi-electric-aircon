@@ -1,6 +1,6 @@
 import type { API } from 'homebridge';
 
-import { MEAirconPlatform } from './MEAirconplatform.js';
+import { MEAirconPlatform } from './MEAirconPlatform.js';
 import { PLATFORM_NAME } from './settings.js';
 
 /**

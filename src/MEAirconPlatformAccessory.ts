@@ -1,6 +1,6 @@
 import type { PlatformAccessory, Service } from 'homebridge'
 
-import type { MEAirconPlatform } from './MEAirconplatform.js'
+import type { MEAirconPlatform } from './MEAirconPlatform.js'
 import MEAircon, { MEAirconConfig } from './MEAircon.js'
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings.js'
 import intervalPromise from 'interval-promise'
@@ -21,13 +21,13 @@ export class MEAirconPlatformAccessory extends MEAircon {
   async init() {
     await this.fetchStates()
 
-    const uuid = this.platform.api.hap.uuid.generate(this.identity.serial);
+    const uuid = this.platform.api.hap.uuid.generate(this.identity.serial || `IP_${this.configs.ip}`);
 
     const existingAccessory = this.platform.accessories.find(accessory => accessory.UUID === uuid)
     if (existingAccessory) {
       this.accessory = existingAccessory
     } else {
-      this.accessory = new this.platform.api.platformAccessory(this.configs.name, uuid);
+      this.accessory = new this.platform.api.platformAccessory(this.configs.name || 'AC', uuid);
       this.accessory.context.device = this.configs;
       this.platform.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [this.accessory])
     }
@@ -35,10 +35,11 @@ export class MEAirconPlatformAccessory extends MEAircon {
     this.accessory.getService(this.platform.Service.AccessoryInformation)!
       .setCharacteristic(this.platform.Characteristic.Manufacturer, 'Mitsubishi Electric')
       .setCharacteristic(this.platform.Characteristic.Model, this.configs.model || 'AC')
+      .setCharacteristic(this.platform.Characteristic.SerialNumber, this.identity.serial)
 
     this.service = this.accessory.getService(this.platform.Service.HeaterCooler) || this.accessory.addService(this.platform.Service.HeaterCooler)
 
-    this.service.setCharacteristic(this.platform.Characteristic.Name, this.configs.name)
+    this.service.setCharacteristic(this.platform.Characteristic.Name, this.configs.name || 'AC')
 
     this.updateInterval = intervalPromise(async () => {
       await this.fetchStates()
@@ -121,13 +122,13 @@ export class MEAirconPlatformAccessory extends MEAircon {
       .onSet(async (value) => {
         await this.setTemerature(Number(value))
       })
-      .onGet(this.getAttribute('temperature'))
+      .onGet(this.getAttributesFun('temperature'))
 
     this.service.getCharacteristic(this.platform.Characteristic.HeatingThresholdTemperature)
       .setProps({ minValue: 16, maxValue: 31, minStep: 0.5 })
       .onSet(async (value) => {
         await this.setTemerature(Number(value))
       })
-      .onGet(this.getAttribute('temperature'))
+      .onGet(this.getAttributesFun('temperature'))
   }
 }

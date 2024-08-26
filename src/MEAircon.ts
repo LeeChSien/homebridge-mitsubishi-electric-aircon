@@ -25,10 +25,10 @@ const parseIdentity = async (response: string): Promise<MEAirconIdentify> => {
   const responseContent = await xmlParser.parseStringPromise(decrypt(responseContainer.ESV))
   const { MAC, SERIAL, RSSI, APP_VER } = responseContent.LSV
   return {
-    mac: MAC,
-    serial: SERIAL,
-    rssi: RSSI,
-    appVersion: APP_VER
+    mac: MAC[0],
+    serial: SERIAL[0],
+    rssi: RSSI[0],
+    appVersion: APP_VER[0]
   } as MEAirconIdentify
 }
 
@@ -149,7 +149,7 @@ export default class MEAircon {
       ...this.states,
       powerOnOff: power ? POWER_ON_OFF.ON : POWER_ON_OFF.OFF
     }
-    const response = await this.postRequest({
+    await this.postRequest({
       ...REQUEST_TEMPLATE,
       CODE: {
         VALUE: [
@@ -158,7 +158,6 @@ export default class MEAircon {
         ]
       }
     })
-    console.log(await parseStates(response))
   }
 
   async setDriveMode(driveMode: DRIVE_MODE) {
@@ -166,7 +165,7 @@ export default class MEAircon {
       ...this.states,
       driveMode
     }
-    const response = await this.postRequest({
+    await this.postRequest({
       ...REQUEST_TEMPLATE,
       CODE: {
         VALUE: [
@@ -175,7 +174,6 @@ export default class MEAircon {
         ]
       }
     })
-    console.log(await parseStates(response))
   }
 
   async setTemerature(temperature: number) {
@@ -183,7 +181,7 @@ export default class MEAircon {
       ...this.states,
       temperature: temperature * 10
     }
-    const response = await this.postRequest({
+    await this.postRequest({
       ...REQUEST_TEMPLATE,
       CODE: {
         VALUE: [
@@ -192,6 +190,5 @@ export default class MEAircon {
         ]
       }
     })
-    console.log(await parseStates(response))
   }
 }
