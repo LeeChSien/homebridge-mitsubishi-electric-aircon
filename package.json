@@ -3,17 +3,16 @@
   "displayName": "Mitsubishi Electric Aircon",
   "type": "module",
   "version": "0.0.1",
-  "private": true,
   "description": "Mitsubishi Electric Aircon",
   "author": "Jason Lee",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/USERNAME/GITHUB_PROJECT_NAME#readme",
+  "homepage": "https://github.com/LeeChSien/homebridge-mitsubishi-electric-aircon",
   "repository": {
     "type": "git",
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME.git"
+    "url": "https://github.com/LeeChSien/homebridge-mitsubishi-electric-aircon.git"
   },
   "bugs": {
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME/issues"
+    "url": "https://github.com/LeeChSien/homebridge-mitsubishi-electric-aircon/issues"
   },
   "keywords": [
     "homebridge-plugin"
