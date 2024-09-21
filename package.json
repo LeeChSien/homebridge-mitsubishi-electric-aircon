@@ -2,7 +2,7 @@
   "name": "homebridge-mitsubishi-electric-aircon",
   "displayName": "Mitsubishi Electric Aircon",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Mitsubishi Electric Aircon",
   "author": "Jason Lee",
   "license": "Apache-2.0",
