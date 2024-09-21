@@ -18,7 +18,8 @@ Control the air conditioner in local area network.
       {
         "name": "My Aircon", // optional, for display
         "ip": "192.168.11.22",
-        "model": "MSZ-ZW5620S-W" // optional, for display
+        "model": "MSZ-ZW5620S-W", // optional, for display
+        "disableAuto": false // optional, to disable auto mode
       }
     ]
   }
